@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Wikipedia Viewer</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="./css/main.css">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular.js"></script>
+	<script type="text/javascript" src="./js/app.module.js"></script>
+	<script type="text/javascript" src="./js/wikipediaViewer.controller.js"></script>
+	<script type="text/javascript" src="./js/wikipediaApi.service.js"></script>
+
+</head>
+<body ng-app='App'>
+	<div class="container" ng-controller="WikipediaViewerController as WikiViewerCntlr">
+		<div class="search center dropdown">
+			<input 
+				type="text" 
+				class="form-control" 
+				ng-model="WikiViewerCntlr.search" 
+				ng-keyup="WikiViewerCntlr.eventSearchHendler($event)">
+			<ul class="dropdown-menu" >
+				<li 
+					ng-repeat="elemtn in WikiViewerCntlr.list" 
+					ng-click="WikiViewerCntlr.selectFormDropdownMenu($event)">
+					<a href="">{{elemtn}}</a>
+				</li>
+			</ul>
+		</div>
+		<div class="content-wrpper">
+			<ul class="search-list">
+				<li ng-repeat="pageInfo in WikiViewerCntlr.wikiList">
+					<a href="https://en.wikipedia.org/?curid={{pageInfo.pageid}}">
+						<div class="bs-callout bs-callout-primary">
+							<h4>
+								{{pageInfo.title}}
+							</h4>
+							<p>{{pageInfo.snippet}}</p>
+						</div>
+					</a>					
+				</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
